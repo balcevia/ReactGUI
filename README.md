@@ -1,2 +1,0 @@
-# ReactGUI
-Created with CodeSandbox
