@@ -1,6 +1,9 @@
 import React from "react";
 import "./styles.css";
 import PropTypes from "prop-types";
+import comment from "./comment.js";
+import { render } from "react-dom";
+import canvas from "./canvas.js";
 
 function warunkowa(increment) {
   if (increment === "Świacie") {
@@ -24,7 +27,7 @@ function moje_hello(props) {
   );
 }
 
-const HelloWorld = moje_hello;
+//const HelloWorld = moje_hello;
 
 //const HelloWorld = ({ where, increment }) => {
 //  return (
@@ -38,7 +41,51 @@ HelloWorld.propTypes = {
   where: PropTypes.string.isRequired,
   increment: PropTypes.func.isRequired
 };
-function App() {
-  return <HelloWorld where="Świecie" />;
+
+
+function HelloWorld extends React.Compoment {
+  render() {
+    return()
+      <div>
+       Hello {this.props.where} z krokiem {this.props.increment}
+       <div style={{color: "red"}}>{this.props.where} </div>
+      </div>  
+    );
+  }
 }
+
+function App extends React.Component() {
+  constructor(props){
+    super(props);
+    this.state = {
+      where:"świat"
+    };
+  }
+
+    onObrazekClicked(){
+      console.log("jest w obrazekClicked");
+      console.log(this);
+      this.setState({
+        where: "Amborski"
+      });
+    }
+  render(){
+    let tab = [ <div key="1">Ala</div>, <div key="2">Zuza</div>, <div key="3">Janek</div>]
+    return(
+      <div>
+       <HelloWorld where="Świecie" />
+       <Comment
+        text="Jakas wiadomość"
+        date={new Date()}
+        author={{
+          name: "janek",
+          avatarUrl:
+            "https://isod.ee.pw.edu.pl/isod-portal/photo/key/gwNm1FNqKgf9eLFsTNcRUg.dat;"
+         }}
+      />
+      </div>
+    ); 
+  }
+}
+
 export default App;
